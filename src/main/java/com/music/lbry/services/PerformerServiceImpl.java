@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -21,4 +22,10 @@ public class PerformerServiceImpl implements PerformerService {
     public List<Performer> findAllByName(String name) {
         return this.performerRepository.findAllByName(name);
     }
+
+    @Override
+    public Optional<Performer> findPerformerById(Long id) {
+        return this.performerRepository.findPerformerById(id);
+    }
+
 }
