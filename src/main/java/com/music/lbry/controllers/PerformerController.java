@@ -29,4 +29,9 @@ public class PerformerController {
     public Optional<Performer> findPerformerById(@PathVariable("id") Long id) {
         return this.performerService.findPerformerById(id);
     }
+
+    @PutMapping("/{id}")
+    public Optional<Performer> updatePerformer(@PathVariable("id") Long id, @RequestBody Performer performer) {
+        return this.performerService.updatePerformer(id, performer);
+    }
 }
