@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class AlbumServiceImpl implements AlbumService {
-    private AlbumRepository albumRepository;
+    private final AlbumRepository albumRepository;
 
     @Override
     public List<Album> findAll() {
