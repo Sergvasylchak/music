@@ -14,13 +14,8 @@ import java.util.List;
 public class AlbumController {
     private final AlbumService albumService;
 
-    @GetMapping("/all")
-    public List<Album> findAll() {
-        return this.albumService.findAll();
-    }
-
-    @GetMapping("/{author}")
-    public List<Album> findAllByAuthor(@PathVariable("author") String author) {
-        return this.albumService.findAllByAuthorName(author);
+    @GetMapping("/album")
+    public List<Album> findAllByAuthor(@PathVariable("query") String query) {
+        return this.albumService.findAllByAuthorsByQuery(query);
     }
 }
