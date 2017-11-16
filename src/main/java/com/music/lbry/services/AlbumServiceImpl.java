@@ -16,4 +16,9 @@ public class AlbumServiceImpl implements AlbumService {
     public List<Album> findAll() {
         return this.albumRepository.findAll();
     }
+
+    @Override
+    public List<Album> findAllByAuthorName(String author) {
+        return this.albumRepository.findAllByAuthorName(author);
+    }
 }
