@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping(Constants.API_ENDPOINT + "/albums")
 @AllArgsConstructor
 public class AlbumController {
-    private AlbumService albumService;
+    private final AlbumService albumService;
 
     @GetMapping("albums")
     public List<Album> findAll(){
