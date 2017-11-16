@@ -4,9 +4,7 @@ import com.music.lbry.models.entities.Album;
 import com.music.lbry.services.AlbumService;
 import com.music.lbry.utils.Constants;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,8 +14,13 @@ import java.util.List;
 public class AlbumController {
     private final AlbumService albumService;
 
-    @GetMapping("albums")
-    public List<Album> findAll(){
+    @GetMapping("/all")
+    public List<Album> findAll() {
         return this.albumService.findAll();
+    }
+
+    @GetMapping("/{author}")
+    public List<Album> findAllByAuthor(@PathVariable("author") String author) {
+        return this.albumService.findAllByAuthorName(author);
     }
 }
