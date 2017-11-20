@@ -24,13 +24,13 @@ public class PerformerServiceImpl implements PerformerService {
     }
 
     @Override
-    public Optional<Performer> findPerformerById(Long id) {
-        return this.performerRepository.findPerformerById(id);
+    public Optional<Performer> findById(Long id) {
+        return this.performerRepository.findById(id);
     }
 
     @Override
     public Optional<Performer> updatePerformer(Long id, Performer performer) {
-        return this.performerRepository.findPerformerById(id)
+        return this.performerRepository.findById(id)
                 .map(c -> {
                     c.setName(performer.getName());
                     return this.performerRepository.save(c);

@@ -15,19 +15,15 @@ import java.util.Optional;
 public class PerformerController {
     private final PerformerService performerService;
 
-    @GetMapping("/performers")
-    public List<Performer> findAll() {
-        return this.performerService.findAll();
-    }
-
-    @GetMapping("/performer")
+    @GetMapping
     public List<Performer> findByName(@RequestParam(required = false) String name) {
-        return this.performerService.findAllByName(name);
+        return Optional.ofNullable(name).map(response -> this.performerService.findAllByName(name))
+                .orElseGet(this.performerService::findAll);
     }
 
     @GetMapping("/{id}")
-    public Optional<Performer> findPerformerById(@PathVariable("id") Long id) {
-        return this.performerService.findPerformerById(id);
+    public Optional<Performer> findById(@PathVariable("id") Long id) {
+        return this.performerService.findById(id);
     }
 
     @PutMapping("/{id}")

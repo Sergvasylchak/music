@@ -10,7 +10,7 @@ public interface PerformerService {
 
     List<Performer> findAllByName(String name);
 
-    Optional<Performer> findPerformerById(Long id);
+    Optional<Performer> findById(Long id);
 
     Optional<Performer> updatePerformer(Long id, Performer performer);
 }

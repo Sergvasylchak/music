@@ -13,5 +13,5 @@ public interface PerformerRepository extends JpaRepository<Performer, Long> {
     " WHERE r.name LIKE %:name%")
     List<Performer> findAllByName(@Param("name") String name);
 
-    Optional<Performer> findPerformerById(Long id);
+    Optional<Performer> findById(Long id);
 }
