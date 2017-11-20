@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(Constants.API_ENDPOINT + "/albums")
@@ -14,13 +15,14 @@ import java.util.List;
 public class AlbumController {
     private final AlbumService albumService;
 
-    @GetMapping("/all")
-    public List<Album> findAll() {
-        return this.albumService.findAll();
+    @GetMapping
+    public List<Album> findAllByAuthor(@RequestParam(required = false) String author) {
+        return Optional.ofNullable(author).map(response -> this.albumService.findAllByAuthor(author))
+                .orElseGet(this.albumService::findAll);
     }
 
-    @GetMapping("/{author}")
-    public List<Album> findAllByAuthor(@PathVariable("author") String author) {
-        return this.albumService.findAllByAuthorName(author);
+    @GetMapping("/{id}")
+    public Optional<Album> findById(@PathVariable("id") Long id) {
+        return this.albumService.findById(id);
     }
 }

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -18,7 +19,12 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public List<Album> findAllByAuthorName(String author) {
-        return this.albumRepository.findAllByAuthorName(author);
+    public List<Album> findAllByAuthor(String author) {
+        return this.albumRepository.findAllByAuthorsByQuery(author);
+    }
+
+    @Override
+    public Optional<Album> findById(Long id) {
+        return this.albumRepository.findById(id);
     }
 }
