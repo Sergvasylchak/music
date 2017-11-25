@@ -1,10 +1,13 @@
 package com.music.lbry.controllers;
 
 import com.music.lbry.models.entities.Performer;
+import com.music.lbry.models.entities.Song;
 import com.music.lbry.services.PerformerService;
+import com.music.lbry.services.SongService;
 import com.music.lbry.utils.Constants;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +17,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class PerformerController {
     private final PerformerService performerService;
+    private final SongService songService;
 
     @GetMapping
     public List<Performer> findByName(@RequestParam(required = false) String name) {
