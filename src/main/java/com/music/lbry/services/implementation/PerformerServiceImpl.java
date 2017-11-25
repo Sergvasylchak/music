@@ -1,7 +1,8 @@
-package com.music.lbry.services;
+package com.music.lbry.services.implementation;
 
 import com.music.lbry.models.entities.Performer;
 import com.music.lbry.repository.PerformerRepository;
+import com.music.lbry.services.PerformerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

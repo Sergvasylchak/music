@@ -5,21 +5,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
-@Table(name = "lbry_albums")
+@Table(name = "lbry_songs")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Album {
+@AllArgsConstructor
+public class Song {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
+    @ManyToMany
+    private List<Performer> performers;
+
     @ManyToOne
-    @NotNull
-    private Performer author;
+    private Album album;
 }
