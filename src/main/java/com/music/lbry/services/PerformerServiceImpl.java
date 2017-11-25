@@ -36,4 +36,9 @@ public class PerformerServiceImpl implements PerformerService {
                     return this.performerRepository.save(c);
                 });
     }
+
+    @Override
+    public List<Performer> saveAll(List<Performer> performers) {
+        return this.performerRepository.saveAll(performers);
+    }
 }

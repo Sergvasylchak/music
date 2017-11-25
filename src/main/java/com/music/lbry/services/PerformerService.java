@@ -13,4 +13,6 @@ public interface PerformerService {
     Optional<Performer> findById(Long id);
 
     Optional<Performer> updatePerformer(Long id, Performer performer);
+
+    List<Performer> saveAll(List<Performer> performers);
 }
