@@ -8,17 +8,19 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PerformerService {
-    List<Performer> findAll();
+    Mono<List<Performer>> findAll();
 
-    List<Performer> findAllByName(String name);
+    Mono<List<Performer>> findAllByName(String name);
 
     Optional<Performer> findById(Long id);
 
-    Optional<Performer> updatePerformer(Long id, Performer performer);
+    Mono<Performer> findByName(String name);
 
-    Mono<ResponseEntity<Object>> deletePerformer(Long id);
+    Mono<Performer> updatePerformer(Long id, Performer performer);
 
-    List<Performer> saveAll(List<Performer> performers);
+    Mono<ResponseEntity<Void>> deletePerformer(Long id);
 
-    Optional<Performer> save(Performer performer);
+    Mono<List<Performer>> saveAll(List<Performer> performers);
+
+    Mono<Performer> save(Performer performer);
 }

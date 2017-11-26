@@ -19,5 +19,6 @@ public class Performer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "name")
     private String name;
 }
