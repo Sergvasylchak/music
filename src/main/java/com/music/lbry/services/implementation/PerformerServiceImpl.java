@@ -4,6 +4,7 @@ import com.music.lbry.models.entities.Performer;
 import com.music.lbry.repository.PerformerRepository;
 import com.music.lbry.services.PerformerService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -17,13 +18,13 @@ public class PerformerServiceImpl implements PerformerService {
     private final PerformerRepository performerRepository;
 
     @Override
-    public List<Performer> findAll() {
-        return this.performerRepository.findAll();
+    public Mono<List<Performer>> findAll() {
+        return Mono.fromCallable(this.performerRepository::findAll);
     }
 
     @Override
-    public List<Performer> findAllByName(String name) {
-        return this.performerRepository.findAllByName(name);
+    public Mono<List<Performer>> findAllByName(String name) {
+        return Mono.fromCallable(() -> this.performerRepository.findAllByName(name));
     }
 
     @Override
@@ -32,29 +33,34 @@ public class PerformerServiceImpl implements PerformerService {
     }
 
     @Override
-    public Optional<Performer> updatePerformer(Long id, Performer performer) {
+    public Mono<Performer> findByName(String name) {
+        return Mono.fromCallable(() -> this.performerRepository.findByName(name));
+    }
+
+    @Override
+    public Mono<Performer> updatePerformer(Long id, Performer performer) {
         return this.performerRepository.findById(id)
                 .map(c -> {
                     c.setName(performer.getName());
-                    return this.performerRepository.save(c);
-                });
+                    return Mono.fromCallable(() -> this.performerRepository.save(c));
+                }).orElse(Mono.empty());
     }
 
     @Override
-    public Mono<ResponseEntity<Object>> deletePerformer(Long id) {
+    public Mono<ResponseEntity<Void>> deletePerformer(Long id) {
         return Mono.fromCallable(() -> {
             this.performerRepository.deleteById(id);
-            return ResponseEntity.ok().build();
-        }).onErrorReturn(ResponseEntity.notFound().build());
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        }).onErrorReturn(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
     @Override
-    public List<Performer> saveAll(List<Performer> performers) {
-        return this.performerRepository.saveAll(performers);
+    public Mono<List<Performer>> saveAll(List<Performer> performers) {
+        return Mono.fromCallable(() -> this.performerRepository.saveAll(performers));
     }
 
     @Override
-    public Optional<Performer> save(Performer performer) {
-        return Optional.of(this.performerRepository.save(performer));
+    public Mono<Performer> save(Performer performer) {
+        return Mono.fromCallable(() -> this.performerRepository.save(performer));
     }
 }

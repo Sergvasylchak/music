@@ -20,10 +20,14 @@ public class PerformerController {
     private final PerformerService performerService;
     private final SongService songService;
 
-    @GetMapping
-    public List<Performer> findByName(@RequestParam(required = false) String name) {
-        return Optional.ofNullable(name).map(response -> this.performerService.findAllByName(name))
-                .orElseGet(this.performerService::findAll);
+    @GetMapping("/all")
+    public Mono<List<Performer>> findAll() {
+        return this.performerService.findAll();
+    }
+
+    @GetMapping("/performers")
+    public Mono<List<Performer>> findAllByName(@RequestParam String name) {
+        return this.performerService.findAllByName(name);
     }
 
     @GetMapping("/{id}")
@@ -32,17 +36,17 @@ public class PerformerController {
     }
 
     @PutMapping("/{id}")
-    public Optional<Performer> updatePerformer(@PathVariable("id") Long id, @RequestBody Performer performer) {
+    public Mono<Performer> update(@PathVariable("id") Long id, @RequestBody Performer performer) {
         return this.performerService.updatePerformer(id, performer);
     }
 
     @PostMapping("/add")
-    public Optional<Performer> save(@RequestBody Performer performer) {
+    public Mono<Performer> save(@RequestBody Performer performer) {
         return this.performerService.save(performer);
     }
 
     @DeleteMapping("/{id}")
-    public Mono<ResponseEntity<Object>> delete(@PathVariable("id") Long id) {
+    public Mono<ResponseEntity<Void>> delete(@PathVariable("id") Long id) {
         return this.performerService.deletePerformer(id);
     }
 }

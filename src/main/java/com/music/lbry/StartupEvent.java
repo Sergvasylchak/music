@@ -39,13 +39,13 @@ public class StartupEvent {
         performers.add(new Performer(8L, "Three Days Grace"));
         performers.add(new Performer(9L, "Eminem"));
         performers.add(new Performer(10L, "Scorpions"));
-        performerService.saveAll(performers);
+        performerService.saveAll(performers).block();
 
-        performerService.findAllByName("Scorpions").forEach(c -> {
+        performerService.findAllByName("Scorpions").block().forEach(c -> {
             this.albumService.add(new Album(1L, "Still Loving You", c));
         });
 
-        performerService.findAllByName("Linkin Park").forEach(c -> {
+        performerService.findAllByName("Linkin Park").block().forEach(c -> {
             this.albumService.add(new Album(2L, "Minutes To Midnight", c));
             this.albumService.add(new Album(4L, "Meteora", c));
 
@@ -53,19 +53,19 @@ public class StartupEvent {
             this.songService.add(new Song(6L, "What I`ve Done", null, Collections.singletonList(c)));
         });
 
-        performerService.findAllByName("Ed Sheeran").forEach(c -> {
+        performerService.findAllByName("Ed Sheeran").block().forEach(c -> {
             this.albumService.add(new Album(3L, "Divide", c));
 
             this.songService.add(new Song(7L, "Eraser", albumService.findAllByName("Divide").get(0), Collections.singletonList(c)));
             this.songService.add(new Song(8L, "Galway Girl", albumService.findAllByName("Divide").get(0), Collections.singletonList(c)));
         });
 
-        performerService.findAllByName("Evanescense").forEach(c -> {
+        performerService.findAllByName("Evanescense").block().forEach(c -> {
             this.songService.add(new Song(4L, "My Immortal", null, Collections.singletonList(c)));
             this.songService.add(new Song(5L, "Bring Me To Life", null, Collections.singletonList(c)));
         });
 
-        performerService.findAllByName("Red Hot Chilli Peppers").forEach(c -> {
+        performerService.findAllByName("Red Hot Chilli Peppers").block().forEach(c -> {
             this.songService.add(new Song(2L, "Dark Necessities", null, Collections.singletonList(c)));
             this.songService.add(new Song(3L, "Bring Me To Life", null, Collections.singletonList(c)));
         });
