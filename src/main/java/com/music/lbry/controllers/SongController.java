@@ -12,14 +12,15 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 @RestController
-@RequestMapping(Constants.API_ENDPOINT)
+@RequestMapping(Constants.API_ENDPOINT + "/songs")
 @AllArgsConstructor
 public class SongController {
     private final SongService songService;
 
-    @GetMapping("/songs/all")
+    @GetMapping("/all")
     public Mono<List<Song>> findAll() {
         return this.songService.findAll();
     }
+
 
 }
