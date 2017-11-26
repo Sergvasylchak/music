@@ -6,6 +6,7 @@ import com.music.lbry.services.PerformerService;
 import com.music.lbry.services.SongService;
 import com.music.lbry.utils.Constants;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -33,5 +34,15 @@ public class PerformerController {
     @PutMapping("/{id}")
     public Optional<Performer> updatePerformer(@PathVariable("id") Long id, @RequestBody Performer performer) {
         return this.performerService.updatePerformer(id, performer);
+    }
+
+    @PostMapping("/add")
+    public Optional<Performer> save(@RequestBody Performer performer) {
+        return this.performerService.save(performer);
+    }
+
+    @DeleteMapping("/{id}")
+    public Mono<ResponseEntity<Object>> delete(@PathVariable("id") Long id) {
+        return this.performerService.deletePerformer(id);
     }
 }
