@@ -42,22 +42,22 @@ public class StartupEvent {
         performerService.saveAll(performers).block();
 
         performerService.findAllByName("Scorpions").block().forEach(c -> {
-            this.albumService.add(new Album(1L, "Still Loving You", c));
+            this.albumService.add(new Album(1L, "Still Loving You", c)).block();
         });
 
         performerService.findAllByName("Linkin Park").block().forEach(c -> {
-            this.albumService.add(new Album(2L, "Minutes To Midnight", c));
-            this.albumService.add(new Album(4L, "Meteora", c));
+            this.albumService.add(new Album(2L, "Minutes To Midnight", c)).block();
+            this.albumService.add(new Album(4L, "Meteora", c)).block();
 
             this.songService.add(new Song(1L, "Numb", null, Collections.singletonList(c)));
             this.songService.add(new Song(6L, "What I`ve Done", null, Collections.singletonList(c)));
         });
 
         performerService.findAllByName("Ed Sheeran").block().forEach(c -> {
-            this.albumService.add(new Album(3L, "Divide", c));
+            this.albumService.add(new Album(3L, "Divide", c)).block();
 
-            this.songService.add(new Song(7L, "Eraser", albumService.findAllByName("Divide").get(0), Collections.singletonList(c)));
-            this.songService.add(new Song(8L, "Galway Girl", albumService.findAllByName("Divide").get(0), Collections.singletonList(c)));
+            this.songService.add(new Song(7L, "Eraser", albumService.findAllByName("Divide").block().get(0), Collections.singletonList(c)));
+            this.songService.add(new Song(8L, "Galway Girl", albumService.findAllByName("Divide").block().get(0), Collections.singletonList(c)));
         });
 
         performerService.findAllByName("Evanescense").block().forEach(c -> {

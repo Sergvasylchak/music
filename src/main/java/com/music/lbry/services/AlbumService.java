@@ -1,6 +1,8 @@
 package com.music.lbry.services;
 
 import com.music.lbry.models.entities.Album;
+import com.music.lbry.models.entities.Performer;
+import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -13,9 +15,11 @@ public interface AlbumService {
 
     Mono<List<Album>> findAll();
 
-    Album add(Album album);
+    Mono<Album> add(Album album);
 
-    List<Album> findAllByName(String name);
+    Mono<Album> update(Long id, Album album);
 
-    void delete(Long id);
+    Mono<List<Album>> findAllByName(String name);
+
+    Mono<ResponseEntity<Void>> delete(Long id);
 }

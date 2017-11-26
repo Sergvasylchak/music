@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public interface AlbumRepository extends JpaRepository<Album, Long> {
     @Query("SELECT a FROM Album a WHERE a.author.name LIKE %:author%")
-    List<Album> findAllByAuthorsByQuery(@Param("author") String author);
+    List<Album> findAllByAuthor(@Param("author") String author);
 
-    Optional<Album> findAlbumById(Long id);
+    Optional<Album> findById(Long id);
 
     @Query("SELECT a FROM Album a WHERE a.name LIKE %:name%")
     List<Album> findAllByName(@Param("name") String name);

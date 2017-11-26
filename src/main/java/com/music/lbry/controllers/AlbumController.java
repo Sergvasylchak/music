@@ -18,16 +18,25 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AlbumController {
     private final AlbumService albumService;
-    private final PerformerService performerService;
 
-    @GetMapping
+    @GetMapping("/albums")
     public Mono<List<Album>> findAllByAuthor(@RequestParam String author) {
         return this.albumService.findAllByAuthor(author);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{name}")
+    public Mono<List<Album>> findAllByName(@PathVariable("name") String name) {
+        return this.albumService.findAllByName(name);
+    }
+
+    @GetMapping("/album/{id}")
     public Optional<Album> findById(@PathVariable("id") Long id) {
         return this.albumService.findById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Mono<Album> updateAlbum(@PathVariable("id") Long id, @RequestBody Album album) {
+        return this.albumService.update(id, album);
     }
 
     @GetMapping("/all")
@@ -36,12 +45,12 @@ public class AlbumController {
     }
 
     @PostMapping("/add")
-    public Album add(@RequestBody Album album) {
+    public Mono<Album> add(@RequestBody Album album) {
         return this.albumService.add(album);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id) {
-        this.albumService.delete(id);
+    public Mono<ResponseEntity<Void>> delete(@PathVariable("id") Long id) {
+        return this.albumService.delete(id);
     }
 }
