@@ -1,6 +1,8 @@
 package com.music.lbry.services;
 
 import com.music.lbry.models.entities.Performer;
+import org.springframework.http.ResponseEntity;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,5 +16,9 @@ public interface PerformerService {
 
     Optional<Performer> updatePerformer(Long id, Performer performer);
 
+    Mono<ResponseEntity<Object>> deletePerformer(Long id);
+
     List<Performer> saveAll(List<Performer> performers);
+
+    Optional<Performer> save(Performer performer);
 }

@@ -4,7 +4,9 @@ import com.music.lbry.models.entities.Performer;
 import com.music.lbry.repository.PerformerRepository;
 import com.music.lbry.services.PerformerService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +41,20 @@ public class PerformerServiceImpl implements PerformerService {
     }
 
     @Override
+    public Mono<ResponseEntity<Object>> deletePerformer(Long id) {
+        return Mono.fromCallable(() -> {
+            this.performerRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }).onErrorReturn(ResponseEntity.notFound().build());
+    }
+
+    @Override
     public List<Performer> saveAll(List<Performer> performers) {
         return this.performerRepository.saveAll(performers);
+    }
+
+    @Override
+    public Optional<Performer> save(Performer performer) {
+        return Optional.of(this.performerRepository.save(performer));
     }
 }

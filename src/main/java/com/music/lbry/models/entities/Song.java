@@ -21,9 +21,9 @@ public class Song {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany
-    private List<Performer> performers;
-
     @ManyToOne
     private Album album;
+
+    @ManyToMany
+    private List<Performer> performers;
 }
