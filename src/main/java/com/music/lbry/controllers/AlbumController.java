@@ -1,9 +1,12 @@
 package com.music.lbry.controllers;
 
 import com.music.lbry.models.entities.Album;
+import com.music.lbry.models.entities.Performer;
 import com.music.lbry.services.AlbumService;
+import com.music.lbry.services.PerformerService;
 import com.music.lbry.utils.Constants;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -15,6 +18,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AlbumController {
     private final AlbumService albumService;
+    private final PerformerService performerService;
 
     @GetMapping
     public Mono<List<Album>> findAllByAuthor(@RequestParam String author) {
@@ -27,7 +31,17 @@ public class AlbumController {
     }
 
     @GetMapping("/all")
-    public Mono<List<Album>> findAll(){
+    public Mono<List<Album>> findAll() {
         return this.albumService.findAll();
+    }
+
+    @PostMapping("/add")
+    public Album add(@RequestBody Album album) {
+        return this.albumService.add(album);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long id) {
+        this.albumService.delete(id);
     }
 }

@@ -9,4 +9,10 @@ public interface SongService {
     Mono<List<Song>> findAll();
 
     Mono<List<Song>> findAllByAlbum(String album);
+
+    Song add(Song song);
+
+    List<Song> findAllByAlbumId(Long id);
+
+    Song update(Long id, Song song);
 }

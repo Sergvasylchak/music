@@ -21,7 +21,7 @@ public class Song {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Album album;
 
     @ManyToMany

@@ -23,4 +23,26 @@ public class SongServiceImpl implements SongService {
     public Mono<List<Song>> findAllByAlbum(String album) {
         return Mono.fromCallable(() -> this.songRepository.findAllByAlbum(album));
     }
+
+    @Override
+    public Song add(Song song) {
+        return this.songRepository.save(song);
+    }
+
+    @Override
+    public List<Song> findAllByAlbumId(Long id) {
+        return this.songRepository.findAllByAlbumId(id);
+    }
+
+    @Override
+    public Song update(Long id, Song song) {
+        return songRepository.findById(id)
+                .map(c -> {
+                    c.setName(song.getName());
+                    c.setAlbum(song.getAlbum());
+                    c.setPerformers(song.getPerformers());
+                    return this.songRepository.save(c);
+                })
+                .orElse(song);
+    }
 }

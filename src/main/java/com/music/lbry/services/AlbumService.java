@@ -12,4 +12,10 @@ public interface AlbumService {
     Optional<Album> findById(Long id);
 
     Mono<List<Album>> findAll();
+
+    Album add(Album album);
+
+    List<Album> findAllByName(String name);
+
+    void delete(Long id);
 }
