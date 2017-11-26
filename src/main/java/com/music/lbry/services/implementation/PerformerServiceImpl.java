@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,7 @@ public class PerformerServiceImpl implements PerformerService {
 
     @Override
     public Mono<Performer> findByName(String name) {
-        return Mono.fromCallable(() -> this.performerRepository.findByName(name));
+        return Mono.justOrEmpty(this.performerRepository.findByName(name));
     }
 
     @Override
@@ -42,7 +43,8 @@ public class PerformerServiceImpl implements PerformerService {
         return this.performerRepository.findById(id)
                 .map(c -> {
                     c.setName(performer.getName());
-                    return Mono.fromCallable(() -> this.performerRepository.save(c));
+                    return Mono.fromCallable(() -> this.performerRepository.save(c))
+                            .onErrorReturn(c);
                 }).orElse(Mono.empty());
     }
 
@@ -56,11 +58,13 @@ public class PerformerServiceImpl implements PerformerService {
 
     @Override
     public Mono<List<Performer>> saveAll(List<Performer> performers) {
-        return Mono.fromCallable(() -> this.performerRepository.saveAll(performers));
+        return Mono.fromCallable(() -> this.performerRepository.saveAll(performers))
+                .onErrorReturn(Collections.emptyList());
     }
 
     @Override
     public Mono<Performer> save(Performer performer) {
-        return Mono.fromCallable(() -> this.performerRepository.save(performer));
+        return Mono.fromCallable(() -> this.performerRepository.save(performer))
+                .onErrorResume(c -> Mono.empty());
     }
 }
