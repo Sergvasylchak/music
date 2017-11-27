@@ -22,4 +22,6 @@ public interface AlbumService {
     Mono<List<Album>> findAllByName(String name);
 
     Mono<ResponseEntity<Void>> delete(Long id);
+
+    Mono<List<Album>> findAllByAuthorId(Long id);
 }

@@ -2,8 +2,10 @@ package com.music.lbry.controllers;
 
 import com.music.lbry.models.entities.Album;
 import com.music.lbry.models.entities.Performer;
+import com.music.lbry.models.entities.Song;
 import com.music.lbry.services.AlbumService;
 import com.music.lbry.services.PerformerService;
+import com.music.lbry.services.SongService;
 import com.music.lbry.utils.Constants;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,30 +20,26 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AlbumController {
     private final AlbumService albumService;
+    private final SongService songService;
 
-    @GetMapping("/albums")
-    public Mono<List<Album>> findAllByAuthor(@RequestParam String author) {
-        return this.albumService.findAllByAuthor(author);
-    }
-
-    @GetMapping("/{name}")
-    public Mono<List<Album>> findAllByName(@PathVariable("name") String name) {
+    @GetMapping
+    public Mono<List<Album>> findAllByName(@RequestParam(name = "name", defaultValue = "") String name) {
         return this.albumService.findAllByName(name);
     }
 
-    @GetMapping("/album/{id}")
+    @GetMapping("/{id}")
     public Optional<Album> findById(@PathVariable("id") Long id) {
         return this.albumService.findById(id);
+    }
+
+    @GetMapping("/{id}/songs")
+    public Mono<List<Song>> findSongs(@PathVariable("id") Long id) {
+        return this.songService.findAllByAlbumId(id);
     }
 
     @PutMapping("/{id}")
     public Mono<Album> updateAlbum(@PathVariable("id") Long id, @RequestBody Album album) {
         return this.albumService.update(id, album);
-    }
-
-    @GetMapping("/all")
-    public Mono<List<Album>> findAll() {
-        return this.albumService.findAll();
     }
 
     @PostMapping("/add")

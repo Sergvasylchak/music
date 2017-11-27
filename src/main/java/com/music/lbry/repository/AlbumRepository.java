@@ -16,4 +16,7 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
 
     @Query("SELECT a FROM Album a WHERE a.name LIKE %:name%")
     List<Album> findAllByName(@Param("name") String name);
+
+    @Query("SELECT a FROM Album a WHERE a.author.id = :id")
+    List<Album> findAllByAuthorId(@Param("id") Long id);
 }

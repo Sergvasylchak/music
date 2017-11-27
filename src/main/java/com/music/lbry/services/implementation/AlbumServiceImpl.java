@@ -21,7 +21,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AlbumServiceImpl implements AlbumService {
     private final AlbumRepository albumRepository;
-    private final SongService songService;
 
     @Override
     public Mono<List<Album>> findAllByAuthor(String author) {
@@ -56,7 +55,7 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public Mono<List<Album>> findAllByName(String name) {
-        return Mono.fromCallable(() -> this.albumRepository.findAllByName(name)).onErrorReturn(Collections.emptyList());
+        return Mono.fromCallable(() -> this.albumRepository.findAllByName(name));
     }
 
     @Override
@@ -65,5 +64,10 @@ public class AlbumServiceImpl implements AlbumService {
             this.albumRepository.deleteById(id);
             return new ResponseEntity<Void>(HttpStatus.OK);
         }).onErrorReturn(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+    }
+
+    @Override
+    public Mono<List<Album>> findAllByAuthorId(Long id) {
+        return Mono.fromCallable(() -> this.albumRepository.findAllByAuthorId(id));
     }
 }
