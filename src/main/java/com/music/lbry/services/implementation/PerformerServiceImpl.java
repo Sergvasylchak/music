@@ -53,7 +53,7 @@ public class PerformerServiceImpl implements PerformerService {
         return Mono.fromCallable(() -> {
             this.performerRepository.deleteById(id);
             return new ResponseEntity<Void>(HttpStatus.OK);
-        }).onErrorReturn(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+        }).onErrorReturn(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @Override
@@ -65,6 +65,6 @@ public class PerformerServiceImpl implements PerformerService {
     @Override
     public Mono<Performer> save(Performer performer) {
         return Mono.fromCallable(() -> this.performerRepository.save(performer))
-                .onErrorResume(c -> Mono.empty());
+                .doOnError(c -> Mono.empty());
     }
 }
