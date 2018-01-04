@@ -1,6 +1,5 @@
 package com.music.lbry;
 
-import com.music.lbry.LbryApplication;
 import com.music.lbry.models.entities.Album;
 import com.music.lbry.models.entities.Performer;
 import com.music.lbry.models.entities.Song;
@@ -8,13 +7,11 @@ import com.music.lbry.services.AlbumService;
 import com.music.lbry.services.PerformerService;
 import com.music.lbry.services.SongService;
 import lombok.AllArgsConstructor;
-import lombok.val;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
