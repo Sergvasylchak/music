@@ -47,7 +47,9 @@ public class StartupEvent {
             this.albumService.add(new Album(4L, "Meteora", c)).block();
 
             this.songService.add(new Song(1L, "Numb", null, Collections.singletonList(c))).block();
-            this.songService.add(new Song(6L, "What I`ve Done", null, Collections.singletonList(c))).block();
+            /*for (int i = 0; i < 1000; i++) {
+                this.songService.add(new Song(10L + i, "What I`ve Done", null, Collections.singletonList(c))).block();
+            }*/
         });
 
         performerService.findAllByName("Ed Sheeran").block().forEach(c -> {
@@ -65,6 +67,7 @@ public class StartupEvent {
         performerService.findAllByName("Red Hot Chilli Peppers").block().forEach(c -> {
             this.songService.add(new Song(2L, "Dark Necessities", null, Collections.singletonList(c))).block();
             this.songService.add(new Song(3L, "Bring Me To Life", null, Collections.singletonList(c))).block();
+            this.songService.add(new Song(9L, "Otherside", null, Collections.singletonList(c))).block();
         });
     }
 }

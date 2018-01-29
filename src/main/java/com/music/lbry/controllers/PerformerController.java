@@ -18,7 +18,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(Constants.API_ENDPOINT + "/performers")
 @AllArgsConstructor
-public class PerformerController {
+public class PerformerController extends BaseController {
     private final PerformerService performerService;
     private final SongService songService;
     private final AlbumService albumService;

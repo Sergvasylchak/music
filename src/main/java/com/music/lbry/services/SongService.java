@@ -1,6 +1,8 @@
 package com.music.lbry.services;
 
 import com.music.lbry.models.entities.Song;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 
@@ -14,7 +16,7 @@ public interface SongService {
 
     Mono<List<Song>> findAllByAuthorId(Long id);
 
-    Mono<List<Song>> findAllByName(String name);
+    Mono<Page<Song>> findAllByName(String name, Pageable pageable);
 
     Mono<Song> add(Song song);
 
