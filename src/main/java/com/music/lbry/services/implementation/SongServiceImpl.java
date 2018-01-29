@@ -4,6 +4,8 @@ import com.music.lbry.models.entities.Song;
 import com.music.lbry.repository.SongRepository;
 import com.music.lbry.services.SongService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -33,8 +35,8 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public Mono<List<Song>> findAllByName(String name) {
-        return Mono.fromCallable(() -> this.songRepository.findAllByName(name));
+    public Mono<Page<Song>> findAllByName(String name, Pageable pageable) {
+        return Mono.fromCallable(() -> this.songRepository.findAllByName(name, pageable));
     }
 
     @Override

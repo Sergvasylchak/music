@@ -1,6 +1,8 @@
 package com.music.lbry.repository;
 
 import com.music.lbry.models.entities.Song;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,7 +15,7 @@ public interface SongRepository extends JpaRepository<Song, Long> {
     List<Song> findAllByAlbumId(@Param("id") Long id);
 
     @Query("SELECT s FROM Song s WHERE s.name LIKE %:name%")
-    List<Song> findAllByName(@Param("name") String name);
+    Page<Song> findAllByName(@Param("name") String name, Pageable pageable);
 
     @Query("SELECT s FROM Song s" +
             " LEFT JOIN s.performers p WHERE p.id = :id")

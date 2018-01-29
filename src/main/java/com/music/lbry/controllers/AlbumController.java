@@ -18,7 +18,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(Constants.API_ENDPOINT + "/albums")
 @AllArgsConstructor
-public class AlbumController {
+public class AlbumController extends BaseController {
     private final AlbumService albumService;
     private final SongService songService;
 
