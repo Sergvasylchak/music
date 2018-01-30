@@ -45,11 +45,14 @@ public class StartupEvent {
         performerService.findAllByName("Linkin Park").block().forEach(c -> {
             this.albumService.add(new Album(2L, "Minutes To Midnight", c)).block();
             this.albumService.add(new Album(4L, "Meteora", c)).block();
+            Album oml = this.albumService.add(new Album(5L, "One More Light", c)).block();
 
             this.songService.add(new Song(1L, "Numb", null, Collections.singletonList(c))).block();
-            /*for (int i = 0; i < 1000; i++) {
-                this.songService.add(new Song(10L + i, "What I`ve Done", null, Collections.singletonList(c))).block();
-            }*/
+            this.songService.add(new Song(11L, "Battle Symphony", oml, Collections.singletonList(c))).block();
+            this.songService.add(new Song(12L, "One More Light", oml, Collections.singletonList(c))).block();
+            this.songService.add(new Song(13L, "Talking to Myself", oml, Collections.singletonList(c))).block();
+            this.songService.add(new Song(14L, "Sharp Edges", oml, Collections.singletonList(c))).block();
+            this.songService.add(new Song(15L, "Castle of Glass", oml, Collections.singletonList(c))).block();
         });
 
         performerService.findAllByName("Ed Sheeran").block().forEach(c -> {
