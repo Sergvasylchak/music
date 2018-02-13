@@ -36,6 +36,7 @@ public class StartupEvent {
         performers.add(new Performer(8L, "Three Days Grace"));
         performers.add(new Performer(9L, "Eminem"));
         performers.add(new Performer(10L, "Scorpions"));
+        performers.add(new Performer(11L, "Paramore"));
         performerService.saveAll(performers).block();
 
         performerService.findAllByName("Scorpions").block().forEach(c -> {
@@ -47,30 +48,37 @@ public class StartupEvent {
             this.albumService.add(new Album(4L, "Meteora", c)).block();
             Album oml = this.albumService.add(new Album(5L, "One More Light", c)).block();
 
-            this.songService.add(new Song(1L, "Numb", null, Collections.singletonList(c))).block();
-            this.songService.add(new Song(11L, "Battle Symphony", oml, Collections.singletonList(c))).block();
-            this.songService.add(new Song(12L, "One More Light", oml, Collections.singletonList(c))).block();
-            this.songService.add(new Song(13L, "Talking to Myself", oml, Collections.singletonList(c))).block();
-            this.songService.add(new Song(14L, "Sharp Edges", oml, Collections.singletonList(c))).block();
-            this.songService.add(new Song(15L, "Castle of Glass", oml, Collections.singletonList(c))).block();
+            this.songService.add(new Song(1L, "Numb", "kXYiU_JCYtU", null, Collections.singletonList(c))).block();
+            this.songService.add(new Song(11L, "Battle Symphony", "D7ab595h0AU", oml, Collections.singletonList(c))).block();
+            this.songService.add(new Song(12L, "One More Light", "Tm8LGxTLtQk", oml, Collections.singletonList(c))).block();
+            this.songService.add(new Song(13L, "Talking to Myself", "lvs68OKOquM", oml, Collections.singletonList(c))).block();
+            this.songService.add(new Song(14L, "Sharp Edges", "M5Ni_LskhFc", oml, Collections.singletonList(c))).block();
+            this.songService.add(new Song(15L, "Castle of Glass", "ScNNfyq3d_w", oml, Collections.singletonList(c))).block();
         });
 
         performerService.findAllByName("Ed Sheeran").block().forEach(c -> {
             this.albumService.add(new Album(3L, "Divide", c)).block();
 
-            this.songService.add(new Song(7L, "Eraser", albumService.findAllByName("Divide").block().get(0), Collections.singletonList(c))).block();
-            this.songService.add(new Song(8L, "Galway Girl", albumService.findAllByName("Divide").block().get(0), Collections.singletonList(c))).block();
+            this.songService.add(new Song(7L, "Eraser", "OjGrcJ4lZCc", albumService.findAllByName("Divide").block().get(0),
+                    Collections.singletonList(c))).block();
+            this.songService.add(new Song(8L, "Galway Girl", "87gWaABqGYs", albumService.findAllByName("Divide").block().get(0),
+                    Collections.singletonList(c))).block();
         });
 
         performerService.findAllByName("Evanescense").block().forEach(c -> {
-            this.songService.add(new Song(4L, "My Immortal", null, Collections.singletonList(c))).block();
-            this.songService.add(new Song(5L, "Bring Me To Life", null, Collections.singletonList(c))).block();
+            this.songService.add(new Song(4L, "My Immortal", "5anLPw0Efmo", null, Collections.singletonList(c))).block();
+            this.songService.add(new Song(5L, "Bring Me To Life", "3YxaaGgTQYM", null, Collections.singletonList(c))).block();
         });
 
         performerService.findAllByName("Red Hot Chilli Peppers").block().forEach(c -> {
-            this.songService.add(new Song(2L, "Dark Necessities", null, Collections.singletonList(c))).block();
-            this.songService.add(new Song(3L, "Bring Me To Life", null, Collections.singletonList(c))).block();
-            this.songService.add(new Song(9L, "Otherside", null, Collections.singletonList(c))).block();
+            this.songService.add(new Song(2L, "Dark Necessities", "Q0oIoR9mLwc", null, Collections.singletonList(c))).block();
+            this.songService.add(new Song(3L, "Scar Tissue", "mzJj5-lubeM", null, Collections.singletonList(c))).block();
+            this.songService.add(new Song(9L, "Otherside", "rn_YodiJO6k", null, Collections.singletonList(c))).block();
+        });
+
+        performerService.findAllByName("Paramore").block().forEach(c -> {
+            this.songService.add(new Song(16L, "Decode", "RvnkAtWcKYg", null, Collections.singletonList(c))).block();
+            this.songService.add(new Song(17L, "That's What You Get", "1kz6hNDlEEg", null, Collections.singletonList(c))).block();
         });
     }
 }

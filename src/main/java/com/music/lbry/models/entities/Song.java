@@ -22,6 +22,9 @@ public class Song implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "url")
+    private String url;
+
     @ManyToOne
     private Album album;
 
