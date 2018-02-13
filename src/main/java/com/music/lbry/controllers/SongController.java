@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -44,5 +43,4 @@ public class SongController extends BaseController {
     public Mono<ResponseEntity<Void>> deleteSong(@PathVariable("id") Long id) {
         return this.songService.deleteById(id);
     }
-
 }
