@@ -37,6 +37,7 @@ public class StartupEvent {
         performers.add(new Performer(9L, "Eminem"));
         performers.add(new Performer(10L, "Scorpions"));
         performers.add(new Performer(11L, "Paramore"));
+        performers.add(new Performer(11L, "Slipknot"));
         performerService.saveAll(performers).block();
 
         performerService.findAllByName("Scorpions").block().forEach(c -> {
@@ -79,6 +80,15 @@ public class StartupEvent {
         performerService.findAllByName("Paramore").block().forEach(c -> {
             this.songService.add(new Song(16L, "Decode", "RvnkAtWcKYg", null, Collections.singletonList(c))).block();
             this.songService.add(new Song(17L, "That's What You Get", "1kz6hNDlEEg", null, Collections.singletonList(c))).block();
+        });
+
+        performerService.findAllByName("Slipknot").block().forEach(c -> {
+            this.songService.add(new Song(18L, "The Devil In I", "XEEasR7hVhA", null, Collections.singletonList(c))).block();
+            this.songService.add(new Song(19L, "Psychosocial", "5abamRO41fE", null, Collections.singletonList(c))).block();
+            this.songService.add(new Song(20L, "Dead Memories", "9gsAz6S_zSw", null, Collections.singletonList(c))).block();
+            this.songService.add(new Song(21L, "Snuff", "LXEKuttVRIo", null, Collections.singletonList(c))).block();
+            this.songService.add(new Song(22L, "Duality", "6fVE8kSM43I", null, Collections.singletonList(c))).block();
+            this.songService.add(new Song(23L, "Vermillion Pt. 2", "LvetJ9U_tVY", null, Collections.singletonList(c))).block();
         });
     }
 }
