@@ -9,6 +9,7 @@ import com.music.lbry.services.SongService;
 import com.music.lbry.utils.Constants;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -44,16 +45,19 @@ public class PerformerController extends BaseController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Mono<Performer> update(@PathVariable("id") Long id, @RequestBody Performer performer) {
         return this.performerService.updatePerformer(id, performer);
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Mono<Performer> save(@RequestBody Performer performer) {
         return this.performerService.save(performer);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Mono<ResponseEntity<Void>> delete(@PathVariable("id") Long id) {
         return this.performerService.deletePerformer(id);
     }

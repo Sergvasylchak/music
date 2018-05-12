@@ -1,11 +1,13 @@
-package com.music.lbry.basic.enums;
+package com.music.lbry.basic.models.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
 public enum ExceptionType {
-    ALREADY_EXISTS(401, "Already exists!");
+    ALREADY_EXISTS(409, "Already exists"),
+    INTERNAL_SERVER_ERROR(500, "Unexpected exception"),
+    UNAUTHORIZED(401, "Unauthorized");
 
     @Getter
     private int code;

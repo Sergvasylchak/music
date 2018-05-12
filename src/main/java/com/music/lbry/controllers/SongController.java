@@ -6,6 +6,7 @@ import com.music.lbry.utils.Constants;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -30,16 +31,19 @@ public class SongController extends BaseController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Mono<Song> addSong(@RequestBody Song song) {
         return this.songService.add(song);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Mono<Song> updateSong(@PathVariable("id") Long id, @RequestBody Song song) {
         return this.songService.update(id, song);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Mono<ResponseEntity<Void>> deleteSong(@PathVariable("id") Long id) {
         return this.songService.deleteById(id);
     }
