@@ -12,7 +12,10 @@ public final class Constants {
     public static final String SIZE = "size";
     public static final String PAGE_SIZE = "10";
 
-    public static final int DEFAULT_ALLOCATION_SIZE = 1;
-    public static final String API_ENDPOINT = "api/lbry";
+    public static final String API_ENDPOINT = "/api/lbry";
+    public static final String AUTH_ENDPOINT = "/auth/lbry";
     public static final String BLANK = "";
+    public static final String BEARER = "Bearer ";
+    public static final String AUTH_HEADER = "Authorization";
+    public static final String ROLE_KEY = "Role";
 }

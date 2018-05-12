@@ -1,14 +1,13 @@
 package com.music.lbry.controllers;
 
 import com.music.lbry.models.entities.Album;
-import com.music.lbry.models.entities.Performer;
 import com.music.lbry.models.entities.Song;
 import com.music.lbry.services.AlbumService;
-import com.music.lbry.services.PerformerService;
 import com.music.lbry.services.SongService;
 import com.music.lbry.utils.Constants;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -38,16 +37,19 @@ public class AlbumController extends BaseController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Mono<Album> updateAlbum(@PathVariable("id") Long id, @RequestBody Album album) {
         return this.albumService.update(id, album);
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Mono<Album> add(@RequestBody Album album) {
         return this.albumService.add(album);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Mono<ResponseEntity<Void>> delete(@PathVariable("id") Long id) {
         return this.albumService.delete(id);
     }
