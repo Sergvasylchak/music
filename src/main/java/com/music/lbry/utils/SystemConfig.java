@@ -15,4 +15,12 @@ public class SystemConfig {
     public void setEnvironment(Environment environment) {
         SystemConfig.environment = environment;
     }
+
+    public static String getKey() {
+        return environment.getProperty("lbry.security.secret-key");
+    }
+
+    public static Integer getTokenExpirationTime() {
+        return environment.getProperty("lbry.security.token.expiration", Integer.class);
+    }
 }
