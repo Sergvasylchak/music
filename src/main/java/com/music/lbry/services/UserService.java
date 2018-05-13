@@ -15,4 +15,10 @@ public interface UserService {
     Mono<LibraryUser> add(LibraryUser libraryUser);
 
     Mono<Optional<LibraryUser>> findByUsername(String usename);
+
+    Mono<LibraryUser> getMe();
+
+    Mono<LibraryUser> update(LibraryUser user);
+
+    Mono<Optional<LibraryUser>> grantRights(Long id);
 }
