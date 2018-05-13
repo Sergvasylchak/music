@@ -23,6 +23,7 @@ public class LibraryUser {
     private String username;
 
     @NotNull
+    @JsonIgnore
     private String password;
 
     @NotNull

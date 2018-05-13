@@ -1,6 +1,7 @@
 package com.music.lbry.basic.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.music.lbry.basic.models.Credentials;
 import com.music.lbry.basic.models.LibraryUserDetails;
 import com.music.lbry.models.entities.LibraryUser;
 import com.music.lbry.models.enums.Role;
@@ -33,7 +34,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                                 HttpServletResponse response) throws AuthenticationException {
         try {
             val user = new ObjectMapper()
-                    .readValue(request.getInputStream(), LibraryUser.class);
+                    .readValue(request.getInputStream(), Credentials.class);
             val userDetails = LibraryUserDetails.of(user);
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(

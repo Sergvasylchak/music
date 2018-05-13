@@ -1,15 +1,14 @@
 package com.music.lbry;
 
-import com.music.lbry.models.entities.Album;
-import com.music.lbry.models.entities.LibraryUser;
-import com.music.lbry.models.entities.Performer;
-import com.music.lbry.models.entities.Song;
+import com.music.lbry.models.entities.*;
 import com.music.lbry.models.enums.Role;
+import com.music.lbry.repository.SavedListRepository;
 import com.music.lbry.services.AlbumService;
 import com.music.lbry.services.PerformerService;
 import com.music.lbry.services.SongService;
 import com.music.lbry.services.UserService;
 import lombok.AllArgsConstructor;
+import lombok.val;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +27,7 @@ public class StartupEvent {
     private final SongService songService;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final SavedListRepository savedListRepository;
 
     @EventListener(ApplicationReadyEvent.class)
     public void initData() {
@@ -97,9 +97,13 @@ public class StartupEvent {
             this.songService.add(new Song(23L, "Vermillion Pt. 2", "LvetJ9U_tVY", null, Collections.singletonList(c))).block();
         });
 
-        this.userService.add(new LibraryUser(1L, "sergii.vasylchak", passwordEncoder.encode("password"),
-                Role.ADMIN, "Serg", "Vasylchak", false)).block();
+        val user = new LibraryUser(1L, "sergii.vasylchak", passwordEncoder.encode("password"),
+                Role.ADMIN, "Serg", "Vasylchak", false);
+        this.userService.add(user).block();
         this.userService.add(new LibraryUser(2L, "ira.bokalo", passwordEncoder.encode("password"),
                 Role.USER, "Ira", "Bokalo", false)).block();
+
+
+        this.savedListRepository.save(new SavedList(1L, "Top of LP hell yeah", user, this.songService.findAllByAuthorId(1L).block()));
     }
 }

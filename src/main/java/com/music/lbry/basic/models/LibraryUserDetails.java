@@ -47,4 +47,11 @@ public class LibraryUserDetails implements UserDetails {
                 .authorities(Collections.singleton(new SimpleGrantedAuthority(user.getRole().getRole())))
                 .build();
     }
+
+    public static LibraryUserDetails of(Credentials credentials) {
+        return LibraryUserDetails.builder()
+                .username(credentials.getUsername())
+                .password(credentials.getPassword())
+                .build();
+    }
 }
