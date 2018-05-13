@@ -2,7 +2,6 @@ package com.music.lbry.controllers;
 
 import com.music.lbry.basic.security.UnauthorizedException;
 import com.music.lbry.models.entities.LibraryUser;
-import com.music.lbry.models.enums.Role;
 import com.music.lbry.services.UserService;
 import com.music.lbry.utils.Constants;
 import lombok.AllArgsConstructor;
