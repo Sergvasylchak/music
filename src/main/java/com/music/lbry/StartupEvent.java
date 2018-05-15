@@ -101,7 +101,15 @@ public class StartupEvent {
                 Role.ADMIN, "Serg", "Vasylchak", false);
         this.userService.add(user).block();
         this.userService.add(new LibraryUser(2L, "ira.bokalo", passwordEncoder.encode("password"),
-                Role.USER, "Ira", "Bokalo", false)).block();
+                Role.ADMIN, "Ira", "Bokalo", false)).block();
+        this.userService.add(new LibraryUser(3L, "mikle.alex", passwordEncoder.encode("password"),
+                Role.ADMIN, "Mikle", "Alex", false)).block();
+        this.userService.add(new LibraryUser(4L, "orest.animal", passwordEncoder.encode("password"),
+                Role.USER, "Orest", "Animal", false)).block();
+        this.userService.add(new LibraryUser(5L, "sviatoslav.ilkiv", passwordEncoder.encode("password"),
+                Role.USER, "Sviatoslav", "Ilkiv", false)).block();
+        this.userService.add(new LibraryUser(6L, "demian.shwetz", passwordEncoder.encode("password"),
+                Role.USER, "Demian", "Shwetz", false)).block();
 
 
         this.savedListRepository.save(new SavedList(1L, "Top of LP hell yeah", user, this.songService.findAllByAuthorId(1L).block()));
