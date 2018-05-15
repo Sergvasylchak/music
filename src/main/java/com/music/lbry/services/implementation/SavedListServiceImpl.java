@@ -60,4 +60,14 @@ public class SavedListServiceImpl implements SavedListService {
                                 .orElse(ResponseEntity.badRequest().build())
                 );
     }
+
+    @Override
+    public Mono<SavedList> findById(Long id) {
+        return this.userService.getMe()
+                .map(user ->
+                        this.savedListRepository.findById(id)
+                                .filter(l -> l.getUser().getId().equals(user.getId()))
+                                .orElse(null)
+                );
+    }
 }

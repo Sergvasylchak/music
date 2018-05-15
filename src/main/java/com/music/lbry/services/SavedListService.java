@@ -13,4 +13,6 @@ public interface SavedListService {
     Mono<SavedList> updateList(Long id, SavedList savedList);
 
     Mono<?> removeList(Long id);
+
+    Mono<SavedList> findById(Long id);
 }

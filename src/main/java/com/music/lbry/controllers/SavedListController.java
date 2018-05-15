@@ -20,6 +20,11 @@ public class SavedListController extends BaseController {
         return this.savedListService.findAllLists();
     }
 
+    @GetMapping("/{id}")
+    public Mono<SavedList> getList(@PathVariable("id") Long id) {
+        return this.savedListService.findById(id);
+    }
+
     @PostMapping
     public Mono<SavedList> createList(@RequestBody SavedList savedList) {
         return this.savedListService.createList(savedList);
